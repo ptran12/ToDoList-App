@@ -5,23 +5,28 @@ const bodyParser = require("body-parser");
 const app = express();
 
 // EJS
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 
-app.get("/", function(req, res){
+app.use(bodyParser.urlencoded({extended: true}));
 
-    var today = new Date();
+app.get("/", function(req, res) {
+  var today = new Date();
 
-    var options = {
-      weekday: "long",
-      day: "numeric",
-      month: "long"
-    };
+  var options = {
+    weekday: "long",
+    day: "numeric",
+    month: "long"
+  };
 
-    var day = today.toLocaleDateString("en-US", options);
+  var day = today.toLocaleDateString("en-US", options);
 
-    res.render("list", {kindOfDay: day});
-
+  res.render("list", { kindOfDay: day });
 });
+
+// POST request for input form
+app.post("/", function(req, res){
+  console.log(req.body.newItem);
+})
 
 
 app.listen(3000, function(){
