@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
+var item = "";
+
 // EJS
 app.set("view engine", "ejs");
 
@@ -20,13 +22,20 @@ app.get("/", function(req, res) {
 
   var day = today.toLocaleDateString("en-US", options);
 
-  res.render("list", { kindOfDay: day });
+  res.render("list", { kindOfDay: day, newListItem: item });
+
 });
 
 // POST request for input form
 app.post("/", function(req, res){
-  console.log(req.body.newItem);
-})
+
+  item = req.body.newItem
+
+  res.redirect("/");
+
+});
+
+
 
 
 app.listen(3000, function(){
