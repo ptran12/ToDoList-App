@@ -32,23 +32,33 @@ app.get("/", function(req, res) {
 // POST request for input form
 app.post("/", function(req, res){
 
-   var item = req.body.newItem
+  let item = req.body.newItem
 
-   items.push(item);
-
-  res.redirect("/");
+  if (req.body.list === "Work"){
+    workItems.push(item);
+    res.redirect("/work");
+  } else {
+    items.push(item);
+    res.redirect("/");
+  }
 
 });
 
+// Work Route
+
 app.get("/work", function(req, res){
+
   res.render("list", {listTitle: "Work List", newListItem: workItems});
+
 });
 
 app.post("/work", function( req, res){
+
   let item = req.body.newItem;
   workItems.push(item);
   res.redirect("/work");
-})
+
+});
 
 
 
