@@ -1,7 +1,7 @@
 
 // console.log(module);
 
-module.exports = "Hello World";
+module.exports = getDate;
 
 function getDate() {
     
